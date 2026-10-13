@@ -1,0 +1,50 @@
+{
+	// Shared base config, and the editor/ESLint view of the whole repo.
+	// Builds use the per-place configs (tsconfig.game.json, tsconfig.lobby.json), tsconfig.test.json
+	// and tsconfig.tools.json.
+	"compilerOptions": {
+		// required
+		"allowSyntheticDefaultImports": true,
+		"downlevelIteration": true,
+		"jsx": "react",
+		"jsxFactory": "React.createElement",
+		"jsxFragmentFactory": "React.Fragment",
+		"module": "commonjs",
+		"moduleResolution": "Node",
+		"noLib": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleDetection": "force",
+		"strict": true,
+		// @rbxts/types has declaration errors of its own (checked under 5.5.3), so its .d.ts files are not type-checked.
+		"skipLibCheck": true,
+		"target": "ESNext",
+		"typeRoots": ["node_modules/@rbxts", "node_modules/@flamework"],
+		"types": ["types"],
+		"plugins": [
+			{
+				"transform": "rbxts-transformer-flamework"
+			}
+		],
+		// configurable
+		// The editor/ESLint view spans all three source roots. rootDirs rather than a rootDir of ".",
+		// because rbxtsc copies rootDir's non-script files into outDir and would copy the whole repo.
+		// The per-project configs below set the rootDir/outDir they actually build with.
+		"rootDir": null,
+		"rootDirs": ["src", "tests", "stories"],
+		"outDir": "out",
+		// Not incremental: the game and lobby builds share out/, and each rbxtsc run prunes the
+		// other's .tsbuildinfo from it, so an incremental cache there never survives.
+		"incremental": false
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"tests/**/*.ts",
+		"tests/**/*.tsx",
+		"stories/**/*.ts",
+		"stories/**/*.tsx"
+	],
+	"exclude": ["node_modules", "out", "out-tools", "include"]
+}

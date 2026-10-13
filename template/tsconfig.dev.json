@@ -1,0 +1,21 @@
+{
+	// The test place: both places' code plus tests/ and stories/, compiled together into out-dev/
+	// against test.project.json. It gets its own output tree (like tsconfig.tools.json) because the
+	// three source roots have to keep their own subfolders, which a shared out/ with the shipping
+	// places can't express.
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"rootDir": null,
+		"rootDirs": ["src", "tests", "stories"],
+		"outDir": "out-dev"
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"tests/**/*.ts",
+		"tests/**/*.tsx",
+		"stories/**/*.ts",
+		"stories/**/*.tsx"
+	],
+	"exclude": ["node_modules", "out", "out-dev", "out-tools", "include"]
+}

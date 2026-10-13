@@ -1,0 +1,13 @@
+/node_modules
+/out
+/out-dev
+/out-tools
+/include
+/build
+*.tsbuildinfo
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+sourcemap.json
+flamework.build

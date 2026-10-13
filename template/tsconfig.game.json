@@ -1,0 +1,11 @@
+{
+	// The game (world) place: common + game. Compiled against game.project.json,
+	// so an import of lobby code fails the build. Tests and stories are not part of a
+	// shipping place: they build with tsconfig.test.json.
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"rootDirs": null
+	},
+	"include": ["src/common/**/*.ts", "src/common/**/*.tsx", "src/game/**/*.ts", "src/game/**/*.tsx"]
+}

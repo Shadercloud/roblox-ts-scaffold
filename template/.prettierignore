@@ -1,0 +1,9 @@
+node_modules
+out
+out-tools
+include
+package-lock.json
+flamework.build
+*.tsbuildinfo
+# Hand-written prose: keep the owner's formatting.
+*.md

@@ -1,0 +1,70 @@
+# Build, lint, format check and headless tests on every push to main.
+# Kept cheap for the private repo's free minutes: docs-only pushes are skipped, a newer push cancels
+# the run it supersedes, and node_modules and the Rokit tools are cached.
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**/*.md"
+      - ".claude/**"
+      - "LICENSE"
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Cache node_modules
+        id: node-modules
+        uses: actions/cache@v6
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-node24-${{ hashFiles('package-lock.json') }}
+
+      - name: Install npm packages
+        if: steps.node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Install Rojo and Lune (rokit.toml)
+        uses: CompeyDev/setup-rokit@v0.2.1
+        with:
+          cache: true
+
+      - name: Build (game, lobby, tools)
+        run: npm run build
+
+      - name: Build places with Rojo
+        run: |
+          mkdir -p build
+          rojo build game.project.json -o build/game.rbxl
+          rojo build lobby.project.json -o build/lobby.rbxl
+          rojo build dev.project.json -o build/dev.rbxl
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Tests (Lune)
+        # npm test would rebuild; the build above is current.
+        run: lune run scripts/test.luau

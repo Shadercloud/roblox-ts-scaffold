@@ -1,0 +1,64 @@
+{
+	"name": "__GAME_NAME__ Lobby",
+	"globIgnorePaths": ["**/*.tsbuildinfo", "assets/**/*.md"],
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"rbxts_include": {
+				"$path": "include",
+				"node_modules": {
+					"$className": "Folder",
+					"@rbxts": {
+						"$path": "node_modules/@rbxts"
+					},
+					"@flamework": {
+						"$path": "node_modules/@flamework"
+					},
+					"@rbxts-js": {
+						"$path": "node_modules/@rbxts-js"
+					}
+				}
+			},
+			"Common": {
+				"$path": { "optional": "out/common/shared" }
+			},
+			"Lobby": {
+				"$path": { "optional": "out/lobby/shared" }
+			}
+		},
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"Common": {
+				"$path": { "optional": "out/common/server" }
+			},
+			"Lobby": {
+				"$path": { "optional": "out/lobby/server" }
+			}
+		},
+		"StarterPlayer": {
+			"$className": "StarterPlayer",
+			"StarterPlayerScripts": {
+				"$className": "StarterPlayerScripts",
+				"Common": {
+					"$path": { "optional": "out/common/client" }
+				},
+				"Lobby": {
+					"$path": { "optional": "out/lobby/client" }
+				}
+			}
+		},
+		"Workspace": {
+			"$className": "Workspace",
+			"$properties": {
+				"FilteringEnabled": true
+			}
+		},
+		"SoundService": {
+			"$className": "SoundService",
+			"$properties": {
+				"RespectFilteringEnabled": true
+			}
+		}
+	}
+}

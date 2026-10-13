@@ -1,0 +1,13 @@
+{
+	// Command-line tools (tools/) plus the domain code they import, compiled to out-tools/ and run
+	// under Lune by scripts/tool.luau. See tools.project.json for where the output sits in the tree.
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"rootDir": null,
+		"rootDirs": ["src", "tools"],
+		"outDir": "out-tools",
+		"plugins": []
+	},
+	"include": ["tools/**/*.ts"],
+	"exclude": ["node_modules", "out", "out-tools", "include"]
+}

@@ -1,0 +1,120 @@
+{
+	"name": "__GAME_NAME__ Dev",
+	"globIgnorePaths": [
+		"**/*.tsbuildinfo",
+		"assets/**/*.md",
+		"out-dev/src/lobby/**/*.server.luau",
+		"out-dev/src/lobby/**/*.client.luau"
+	],
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"rbxts_include": {
+				"$path": "include",
+				"node_modules": {
+					"$className": "Folder",
+					"@rbxts": {
+						"$path": "node_modules/@rbxts"
+					},
+					"@flamework": {
+						"$path": "node_modules/@flamework"
+					},
+					"@rbxts-js": {
+						"$path": "node_modules/@rbxts-js"
+					}
+				}
+			},
+			"Common": {
+				"$path": { "optional": "out-dev/src/common/shared" }
+			},
+			"Game": {
+				"$path": { "optional": "out-dev/src/game/shared" }
+			},
+			"Lobby": {
+				"$path": { "optional": "out-dev/src/lobby/shared" }
+			},
+			"Tests": {
+				"$className": "Folder",
+				"Common": {
+					"$path": { "optional": "out-dev/tests/common/shared" }
+				},
+				"Game": {
+					"$path": { "optional": "out-dev/tests/game/shared" }
+				},
+				"Lobby": {
+					"$path": { "optional": "out-dev/tests/lobby/shared" }
+				}
+			}
+		},
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"Common": {
+				"$path": { "optional": "out-dev/src/common/server" }
+			},
+			"Game": {
+				"$path": { "optional": "out-dev/src/game/server" }
+			},
+			"Lobby": {
+				"$path": { "optional": "out-dev/src/lobby/server" }
+			},
+			"Tests": {
+				"$className": "Folder",
+				"Common": {
+					"$path": { "optional": "out-dev/tests/common/server" }
+				},
+				"Game": {
+					"$path": { "optional": "out-dev/tests/game/server" }
+				},
+				"Lobby": {
+					"$path": { "optional": "out-dev/tests/lobby/server" }
+				}
+			},
+			"RunTests": {
+				"$path": "scripts/studio/run-tests.server.luau"
+			},
+			"LunitTags": {
+				"$path": "scripts/lunit-tags.luau"
+			}
+		},
+		"StarterPlayer": {
+			"$className": "StarterPlayer",
+			"StarterPlayerScripts": {
+				"$className": "StarterPlayerScripts",
+				"Common": {
+					"$path": { "optional": "out-dev/src/common/client" }
+				},
+				"Game": {
+					"$path": { "optional": "out-dev/src/game/client" }
+				},
+				"Lobby": {
+					"$path": { "optional": "out-dev/src/lobby/client" }
+				},
+				"Tests": {
+					"$className": "Folder",
+					"Common": {
+						"$path": { "optional": "out-dev/tests/common/client" }
+					},
+					"Game": {
+						"$path": { "optional": "out-dev/tests/game/client" }
+					},
+					"Lobby": {
+						"$path": { "optional": "out-dev/tests/lobby/client" }
+					}
+				},
+				"Stories": {
+					"$className": "Folder",
+					"Common": {
+						"$path": { "optional": "out-dev/stories/common/client" }
+					},
+					"Game": {
+						"$path": { "optional": "out-dev/stories/game/client" }
+					},
+					"Lobby": {
+						"$path": { "optional": "out-dev/stories/lobby/client" }
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,58 @@
+{
+  "name": "__GAME_SLUG__",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "scripts": {
+    "build": "npm run build:game && npm run build:lobby && npm run build:dev && npm run build:tools",
+    "build:game": "rbxtsc -p tsconfig.game.json --rojo game.project.json",
+    "build:lobby": "rbxtsc -p tsconfig.lobby.json --rojo lobby.project.json",
+    "build:dev": "rbxtsc -p tsconfig.dev.json --rojo dev.project.json",
+    "build:tools": "rbxtsc -p tsconfig.tools.json --rojo tools.project.json",
+    "tool": "npm run build:tools --silent && lune run scripts/tool.luau",
+    "watch": "rbxtsc -w -p tsconfig.dev.json --rojo dev.project.json",
+    "dev": "concurrently -n build,rojo -c blue,yellow \"rbxtsc -w -p tsconfig.dev.json --rojo dev.project.json\" \"rojo serve dev.project.json --port 34870\"",
+    "dev:lobby": "concurrently -n build,rojo -c green,magenta \"rbxtsc -w -p tsconfig.lobby.json --rojo lobby.project.json\" \"rojo serve lobby.project.json --port 34871\"",
+    "serve:dev": "rojo serve dev.project.json --port 34870",
+    "test": "npm run build && lune run scripts/test.luau",
+    "lint": "eslint src tests stories tools",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit -p tsconfig.game.json && tsc --noEmit -p tsconfig.lobby.json && tsc --noEmit -p tsconfig.dev.json && tsc --noEmit -p tsconfig.tools.json"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@rbxts/compiler-types": "^3.0.0-types.0",
+    "@rbxts/lunit": "^4.0.2",
+    "@rbxts/types": "^1.0.952",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.10.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-roblox-ts": "^1.4.1",
+    "prettier": "^3.9.6",
+    "rbxts-transformer-flamework": "^1.3.2",
+    "roblox-ts": "^3.0.0",
+    "typescript": "5.5.3",
+    "typescript-eslint": "^8.70.0"
+  },
+  "dependencies": {
+    "@flamework/components": "^1.3.2",
+    "@flamework/core": "^1.3.2",
+    "@flamework/networking": "^1.3.2",
+    "@rbxts/charm": "^0.11.0",
+    "@rbxts/charm-sync": "^0.4.0",
+    "@rbxts/react": "^17.3.7-ts.2",
+    "@rbxts/react-charm": "^0.4.0",
+    "@rbxts/react-clean-ui": "^1.2.4",
+    "@rbxts/react-roblox": "^17.3.7-ts.2",
+    "@rbxts/services": "^1.6.0",
+    "@rbxts/ui-labs": "^2.4.2"
+  },
+  "overrides": {
+    "@rbxts/react-charm": {
+      "@rbxts/react": "$@rbxts/react"
+    }
+  }
+}
